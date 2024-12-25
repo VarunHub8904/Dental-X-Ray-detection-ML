@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dental X-Ray Analysis</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Custom Styles */
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .upload-container {
+            border: 2px dashed #dee2e6;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            background-color: #fff;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .upload-container:hover {
+            border-color: #0d6efd;
+            background-color: #f8f9ff;
+        }
+
+        .upload-icon {
+            font-size: 48px;
+            color: #0d6efd;
+            margin-bottom: 15px;
+        }
+
+        .preview-container {
+            position: relative;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .preview-image {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .remove-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .remove-btn:hover {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .loading-spinner {
+            display: none;
+            margin: 20px auto;
+        }
+
+        .result-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .severity-badge {
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .severity-moderate {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .appointment-btn {
+            background: linear-gradient(135deg, #0d6efd, #0099ff);
+            border: none;
+            padding: 12px 25px;
+            transition: all 0.3s ease;
+        }
+
+        .appointment-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(13, 110, 253, 0.3);
+            background: linear-gradient(135deg, #0957cc, #007acc);
+        }
+
+        .instructions-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .instructions-list {
+            padding-left: 20px;
+        }
+
+        .instructions-list li {
+            margin-bottom: 10px;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <!-- Main Card -->
+                <div class="card mb-4">
+                    <div class="card-header bg-white py-3">
+                        <h4 class="text-center text-primary mb-0">
+                            <i class="fas fa-tooth me-2"></i> X-Ray Analysis
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <!-- Upload Section -->
+                        <div class="upload-container mb-4" id="uploadContainer">
+                            <input type="file" id="xrayUpload" accept="image/*" class="d-none">
+                            <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                            <h5 class="mb-2">Upload X-Ray Image</h5>
+                            <p class="text-muted">Click or drag and drop your X-ray image here</p>
+                        </div>
+
+
+
+<!-- Preview Section -->
+<div class="preview-container d-none" id="previewContainer">
+    <button class="remove-btn" id="removeBtn">
+        <i class="fas fa-times"></i>
+    </button>
+    <img id="previewImage" class="preview-image" src="" alt="X-ray preview">
+    
+    <!-- Analyze Button -->
+    <button class="btn btn-primary w-100 mt-3" id="analyzeBtn">
+        <i class="fas fa-search me-2"></i>Analyze Image
+    </button>
+
+    <!-- Schedule Appointment Button -->
+    <button class="btn appointment-btn text-white w-100 mt-3 d-none" id="appointmentBtn" > 
+        <i class="fas fa-calendar-alt me-2"><a href="oppointment.html" style="color: white">Schedule oppointment</a></i> 
+    </button>
+   
+</div>
+
+
+
+
+
+
+                        <!-- Loading Spinner -->
+                        <div class="loading-spinner text-center" id="loadingSpinner">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <p class="mt-2 text-muted">Analyzing X-ray image...</p>
+                        </div>
+
+                        <!-- Results Section -->
+                        <!-- <div class="result-card d-none" id="resultContainer">
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <h5 class="mb-0">Detection Results</h5>
+                                <span class="severity-badge severity-moderate" id="severityBadge">Moderate</span>
+                            </div>
+                            <div class="result-details">
+                                <p><strong>Condition:</strong> <span id="conditionText">Dental Cavity</span></p>
+                                <p><strong>Confidence:</strong> <span id="confidenceText">92%</span></p>
+                                <p><strong>Location:</strong> <span id="locationText">Upper Right Molar</span></p>
+                                <p><strong>Recommendation:</strong> <span id="recommendationText">Immediate treatment recommended</span></p>
+                            </div>
+                            <button class="btn appointment-btn text-white w-100 mt-3" id="appointmentBtn">
+                                <i class="fas fa-calendar-alt me-2"></i>Schedule Appointment
+                            </button>
+                        </div>
+                    </div> -->
+                </div>
+
+                <!-- Instructions Card -->
+                <div class="instructions-card">
+                    <h5 class="mb-3">How to Use</h5>
+                    <ol class="instructions-list">
+                        <li>Upload your dental X-ray image using the upload area above</li>
+                        <li>Wait for our AI system to analyze the image</li>
+                        <li>Review the detection results and recommendations</li>
+                        <li>If an issue is detected, use the appointment button to schedule a consultation</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+    const uploadContainer = document.getElementById('uploadContainer');
+    const xrayUpload = document.getElementById('xrayUpload');
+    const previewContainer = document.getElementById('previewContainer');
+    const previewImage = document.getElementById('previewImage');
+    const removeBtn = document.getElementById('removeBtn');
+    const analyzeBtn = document.getElementById('analyzeBtn');
+    const appointmentBtn = document.getElementById('appointmentBtn');
+    const loadingSpinner = document.getElementById('loadingSpinner');
+    
+    // Handle file upload
+    uploadContainer.addEventListener('click', () => xrayUpload.click());
+    
+    uploadContainer.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        uploadContainer.style.borderColor = '#0d6efd';
+    });
+    
+    uploadContainer.addEventListener('dragleave', (e) => {
+        e.preventDefault();
+        uploadContainer.style.borderColor = '#dee2e6';
+    });
+    
+    uploadContainer.addEventListener('drop', (e) => {
+        e.preventDefault();
+        uploadContainer.style.borderColor = '#dee2e6';
+        const file = e.dataTransfer.files[0];
+        if (file) handleFile(file);
+    });
+    
+    xrayUpload.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) handleFile(file);
+    });
+    
+    // Handle file processing
+    function handleFile(file) {
+        if (!file.type.startsWith('image/')) {
+            alert('Please upload an image file');
+            return;
+        }
+    
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            previewImage.src = e.target.result;
+            uploadContainer.classList.add('d-none');
+            previewContainer.classList.remove('d-none');
+        };
+        reader.readAsDataURL(file);
+    }
+    
+    // Remove image
+    removeBtn.addEventListener('click', () => {
+        uploadContainer.classList.remove('d-none');
+        previewContainer.classList.add('d-none');
+        appointmentBtn.classList.add('d-none');
+        analyzeBtn.classList.remove('d-none');
+        xrayUpload.value = '';
+    });
+    
+    // Handle Analyze Button
+    analyzeBtn.addEventListener('click', () => {
+        analyzeBtn.classList.add('d-none');
+        loadingSpinner.style.display = 'block';
+    
+        // Simulate analysis process
+        setTimeout(() => {
+            loadingSpinner.style.display = 'none';
+    
+            // Simulate detection of issues
+            const issuesDetected = Math.random() > 0.5; // Randomize for demonstration
+    
+            if (issuesDetected) {
+                appointmentBtn.classList.remove('d-none'); // Show appointment button
+                alert('Issues detected! Please schedule an appointment.');
+            } else {
+                alert('No issues detected in the image.');
+            }
+        }, 2000);
+    });
+    
+    // Handle Schedule Appointment Button
+    appointmentBtn.addEventListener('click', () => {
+        alert('Redirecting to appointment booking system...');
+    });
+    });
+    
+    </script> 
+
+   
+</body>
+</html>

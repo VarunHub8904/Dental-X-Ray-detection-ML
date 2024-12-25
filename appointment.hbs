@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>schedule Appointment</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Schedule Appointment</h1>
+    <form id="appointment-form">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+      <label for="date">Appointment Date:</label>
+      <input type="date" id="date" name="date" required>
+
+      <label for="time">Appointment Time:</label>
+      <input type="time" id="time" name="time" required>
+
+      <label for="doctor">Select Doctor:</label>
+      <select id="doctor" name="doctor" required>
+        <option value="" disabled selected>Select a doctor</option>
+        <option value="Dr. Smith">Dr. Brijesh</option>
+        <option value="Dr. Jane">Dr. Supreetha</option>
+        <option value="Dr. Brown">Dr. Sneha</option>
+      </select>
+
+      <button type="button" id="book-button">Book Appointment</button>
+    </form>
+    <p id="success-message" style="display: none;">Your appointment has been successfully booked!</p>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
+
+<style>
+    body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f8ff;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 400px;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #007BFF;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+input, select {
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+}
+
+button {
+  background-color: #007BFF;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  margin-top: 20px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+#success-message {
+  color: green;
+  text-align: center;
+  margin-top: 20px;
+}
+</style>
+
+<script>
+    document.getElementById('book-button').addEventListener('click', function () {
+  const name = document.getElementById('name').value;
+  const email = document.getElementById('email').value;
+  const date = document.getElementById('date').value;
+  const time = document.getElementById('time').value;
+  const doctor = document.getElementById('doctor').value;
+
+  if (name && email && date && time && doctor) {
+    document.getElementById('success-message').style.display = 'block';
+    document.getElementById('appointment-form').reset();
+  } else {
+    alert('Please fill out all fields.');
+  }
+});
+</script>

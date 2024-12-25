@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dental Appointment - Contact Us</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="contact-container">
+        <!-- Contact Info Section -->
+        <div class="contact-info">
+            <h2>Contact Us</h2>
+            <p>We are here to assist you. Feel free to get in touch with us!</p>
+            <div class="info-item">
+                <img src="location-icon.png" alt="Location Icon">
+                <p><strong>Our Office:</strong> 123 Dental Street, Udupi, Karnataka, India</p>
+            </div>
+            <div class="info-item">
+                <img src="email-icon.png" alt="Email Icon">
+                <p><strong>Email Us:</strong> contact@dentalclinic.com</p>
+            </div>
+            <div class="info-item">
+                <img src="phone-icon.png" alt="Phone Icon">
+                <p><strong>Call Us:</strong> +91 98765 43210</p>
+            </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="contact-form">
+            <form id="contactForm">
+                <input type="text" id="name" name="name" placeholder="Your Name" required>
+                <input type="email" id="email" name="email" placeholder="Your Email" required>
+                <input type="text" id="subject" name="subject" placeholder="Subject">
+                <textarea id="message" name="message" placeholder="Message" rows="5" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+            <p id="formStatus" class="status-message"></p>
+        </div>
+
+        <!-- Google Map Section -->
+        <div class="contact-map">
+            <h3>Find Us Here</h3>
+            <div id="mapContainer" class="map-placeholder">
+                <p>Loading map...</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-signup">
+            <p>Subscribe for updates</p>
+            <form action="#">
+                <input type="email" placeholder="Your Email">
+                <button type="submit">Sign Up</button>
+            </form>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+<style>
+    /* Responsive Design */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.contact-container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+    background-color: #f9f9f9;
+    gap: 20px;
+}
+
+.contact-info, .contact-form, .contact-map {
+    flex: 1 1 calc(33.333% - 20px);
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.contact-info h2 {
+    color: #0078d7;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.info-item img {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+}
+
+.contact-form form input, .contact-form form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.contact-form form button {
+    background-color: #0078d7;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.contact-map iframe {
+    width: 100%;
+    height: 300px;
+    border: none;
+    border-radius: 4px;
+}
+
+.footer-signup {
+    background-color: #0078d7;
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+    .contact-container {
+        flex-direction: column;
+    }
+
+    .contact-info, .contact-form, .contact-map {
+        flex: 1 1 100%;
+    }
+}
+
+.status-message {
+    margin-top: 10px;
+    font-size: 14px;
+    color: green;
+}
+
+.map-placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    background-color: #e0e0e0;
+    border-radius: 4px;
+    color: #555;
+}
+
+</style>
+
+<script>
+    // script.js
+
+// Form Validation and Submission Simulation
+document.getElementById('contactForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+    const statusMessage = document.getElementById('formStatus');
+
+    if (!name || !email || !message) {
+        statusMessage.textContent = "Please fill in all required fields.";
+        statusMessage.style.color = "red";
+        return;
+    }
+
+    // Simulate successful submission
+    statusMessage.textContent = "Thank you for your message! We'll get back to you soon.";
+    statusMessage.style.color = "green";
+
+    // Clear the form
+    document.getElementById('contactForm').reset();
+});
+
+// Dynamic Map Loading
+window.addEventListener('load', function () {
+    const mapContainer = document.getElementById('mapContainer');
+    mapContainer.innerHTML = `
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3916.150235646725!2d76.91780351511677!3d13.370944790633198!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bbbec4200000001%3A0xd2f356faec62378b!2sUdupi%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1698743898755!5m2!1sen!2sin"
+            width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy">
+        </iframe>
+    `;
+});
+
+</script>

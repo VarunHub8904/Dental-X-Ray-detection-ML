@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dental X-ray Disease Detection</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #f8fafc;
+            color: #2d3748;
+            line-height: 1.6;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 120px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='M30 30h1v1h-1z' fill='rgba(255,255,255,0.1)'/%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.2;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: #f8fafc;
+            clip-path: polygon(0 50%, 100% 0, 100% 100%, 0% 100%);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease-out;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 20px 0;
+            box-shadow: 0 10px 25px rgba(37,99,235,0.1);
+            transition: all 0.3s ease;
+            border-left: 4px solid #2563eb;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(37,99,235,0.2);
+        }
+
+        .problem-statement {
+            font-size: 1.5rem;
+            color: #1e40af;
+            text-align: center;
+            margin: 40px 0;
+            padding: 30px;
+            border-left: none;
+            background: linear-gradient(to right, #ffffff, #f0f7ff, #ffffff);
+            position: relative;
+        }
+
+        .solution {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .benefit-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(37,99,235,0.1);
+            transition: all 0.3s ease;
+            border-top: 4px solid #2563eb;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(37,99,235,0.2);
+        }
+
+        .benefit-card h3 {
+            color: #1e40af;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .benefit-card h3::before {
+            content: '⚕';
+            margin-right: 10px;
+            color: #2563eb;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-title {
+            text-align: center;
+            margin: 40px 0;
+            color: #1e40af;
+            font-size: 2.2rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: #2563eb;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <h1>Dental X-ray Disease Detection</h1>
+        <p style="font-size: 1.4rem; max-width: 800px; margin: 0 auto;">
+            Revolutionizing Dental Diagnostics with AI Technology
+        </p>
+    </section>
+
+    <div class="container">
+        <div class="problem-statement card">
+            "Traditional dental disease detection methods are time-consuming and prone to human error, leading to delayed diagnoses and potential oversight of critical conditions."
+        </div>
+
+        <h2 class="section-title">Our Solution</h2>
+        
+        <div class="card">
+            <h3 style="color: #1e40af; margin-bottom: 20px; font-size: 1.8rem;">
+                <span style="margin-right: 10px;">⚕</span>Advanced AI Analysis
+            </h3>
+            <p>
+                Our system leverages cutting-edge machine learning algorithms to analyze dental X-ray images, 
+                automatically detecting and classifying various dental conditions with unprecedented accuracy. 
+                By combining deep learning techniques with extensive dental imaging expertise, we've created a 
+                revolutionary tool for modern dental professionals.
+            </p>
+        </div>
+
+        <div class="solution">
+            <div class="benefit-card">
+                <h3>Enhanced Accuracy</h3>
+                <p>
+                    Our ML model achieves over 95% accuracy in detecting dental diseases, significantly 
+                    reducing the risk of misdiagnosis and ensuring more reliable treatment planning.
+                </p>
+            </div>
+
+            <div class="benefit-card">
+                <h3>Time Efficiency</h3>
+                <p>
+                    Automated analysis reduces diagnosis time from hours to minutes, allowing dental 
+                    professionals to focus more on patient care and treatment planning.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const cards = document.querySelectorAll('.card, .benefit-card');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        cards.forEach(card => {
+            card.style.opacity = 0;
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'all 0.6s ease-out';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
